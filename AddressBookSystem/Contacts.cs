@@ -27,7 +27,7 @@ namespace AddressBookSystem
           public static List<Contacts> addressBook = new List<Contacts>();    
 
             public void AddContacts()
-            {
+            {             
                 Console.Write("Enter First Name:- ");
                 contact.firstName = Console.ReadLine();
                 Console.Write("Enter Last Name:- ");
@@ -46,7 +46,7 @@ namespace AddressBookSystem
                 contact.email = Console.ReadLine();
                 Console.WriteLine("Contact has been Created..!!\n");
                 addressBook.Add(contact);
-
+                
             }
             public void Toprint()   //Printing details taking by the user
             {
