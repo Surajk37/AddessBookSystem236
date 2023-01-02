@@ -121,7 +121,7 @@ namespace AddressBookSystem
                 }
               }
                if (input == false)
-                Console.WriteLine("\n\tContact name not found");
+                Console.WriteLine("\n\tContact not found");
                 Toprint();
             }
 
