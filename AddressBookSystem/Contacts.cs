@@ -124,6 +124,24 @@ namespace AddressBookSystem
                 Console.WriteLine("\n\tContact not found");
                 Toprint();
             }
+         public void DeleteContact()
+         {
+            AddContacts();
+            Console.WriteLine("Enter the Firstname of the person you would like to remove.");
+            string name = Console.ReadLine();
+            foreach (var person in addressBook.ToList())
+            {
+                if (person.firstName.ToUpper() == name.ToUpper())
+                {
+                    addressBook.Remove(person);
+                    Console.WriteLine("Contact is deleted");
+                }
+                else
+                {
+                    Console.WriteLine("Contact is not present");
+                }
+            }
+         }
 
         }       
 }
