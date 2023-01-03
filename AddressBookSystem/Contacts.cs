@@ -1,5 +1,4 @@
-﻿
-using Microsoft.VisualBasic.FileIO;
+﻿using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,63 +20,68 @@ namespace AddressBookSystem
         public string email { get; set; }
     }
 
-        public class AddressBook2
+    public class AddressBook2
+    {
+        Contacts contact = new Contacts();
+        public static List<Contacts> addressBook = new List<Contacts>();
+        public Dictionary<string, Contacts> contacts = new Dictionary<string, Contacts>();  //added dictionary to store key/value pairs
+        public AddressBook2()
         {
-          Contacts contact = new Contacts();
-          public static List<Contacts> addressBook = new List<Contacts>();    
-
-            public void AddContacts()
-            {             
-                Console.Write("Enter First Name:- ");
-                contact.firstName = Console.ReadLine();
-                Console.Write("Enter Last Name:- ");
-                contact.lastName = Console.ReadLine();
-                Console.Write("Enter Address:- ");
-                contact.address = Console.ReadLine();
-                Console.Write("Enter City:- ");
-                contact.city = Console.ReadLine();
-                Console.Write("Enter State:- ");
-                contact.state = Console.ReadLine();
-                Console.Write("Enter Zip:- ");
-                contact.zipcode = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Enter Phone Number:- ");
-                contact.phoneNo = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Enter Email Id:- ");
-                contact.email = Console.ReadLine();
-                Console.WriteLine("Contact has been Created..!!\n");
-                addressBook.Add(contact);
-                
-            }
-            public void Toprint()   //Printing details taking by the user
+            this.contacts = new Dictionary<string, Contacts>();
+        }
+        public void AddContacts()
+        {
+            Console.Write("Enter First Name:- ");
+            contact.firstName = Console.ReadLine();
+            Console.Write("Enter Last Name:- ");
+            contact.lastName = Console.ReadLine();
+            Console.Write("Enter Address:- ");
+            contact.address = Console.ReadLine();
+            Console.Write("Enter City:- ");
+            contact.city = Console.ReadLine();
+            Console.Write("Enter State:- ");
+            contact.state = Console.ReadLine();
+            Console.Write("Enter Zip:- ");
+            contact.zipcode = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter Phone Number:- ");
+            contact.phoneNo = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter Email Id:- ");
+            contact.email = Console.ReadLine();
+            Console.WriteLine("Contact has been Created..!!\n");
+            addressBook.Add(contact);
+            Contacts newContacts = new Contacts();
+            this.contacts.Add(contact.firstName, newContacts);
+        }
+        public void Toprint()   //Printing details taking by the user
+        {
+            foreach (Contacts person in addressBook)
             {
-                foreach (Contacts person in addressBook)
-                {
-                    Console.WriteLine("\n\tThe Details of a Person Are Displayed");
-                    Console.WriteLine("First Name: \t" + person.firstName);
-                    Console.WriteLine("Last Name: \t" + person.lastName);
-                    Console.WriteLine("Address: \t" + person.address);
-                    Console.WriteLine("City: \t\t" + person.city);
-                    Console.WriteLine("State: \t\t" + person.state);
-                    Console.WriteLine("Zipcode: \t" + person.zipcode);
-                    Console.WriteLine("Phone Number: \t" + person.phoneNo);
-                    Console.WriteLine("Email: \t\t" + person.email);
+                Console.WriteLine("\n\tThe Details of a Person Are Displayed");
+                Console.WriteLine("First Name: \t" + person.firstName);
+                Console.WriteLine("Last Name: \t" + person.lastName);
+                Console.WriteLine("Address: \t" + person.address);
+                Console.WriteLine("City: \t\t" + person.city);
+                Console.WriteLine("State: \t\t" + person.state);
+                Console.WriteLine("Zipcode: \t" + person.zipcode);
+                Console.WriteLine("Phone Number: \t" + person.phoneNo);
+                Console.WriteLine("Email: \t\t" + person.email);
 
-                }
             }
-            public  void EditContact()  //Editing Contacts using their first name
+        }
+        public void EditContact()  //Editing Contacts using their first name
+        {
+            AddContacts();    //To edit the contact need to save the contact details first
+            Console.WriteLine("\nTo Edit Contact Enter  First Name");
+            string name = Console.ReadLine();
+            bool input = false;
+            foreach (var person in addressBook)
             {
-              AddContacts();    //To edit the contact need to save the contact details first
-              Console.WriteLine("\nTo Edit Contact Enter  First Name");
-              string name = Console.ReadLine();
-              bool input = false;
-              foreach (var person in addressBook)
-              {
                 if (contact.firstName == name)
                 {
                     input = true;
                     Console.WriteLine("\tContact Found...\n");
                     Console.WriteLine("Select option for update Details");
-                        Console.WriteLine("\n1:Edit first name\n2:Edit last name \n3:Edit Address\n4:Edit City\n5:Edit State\n6:Edit ZipCode\n7:Edit Phone Number\n8:Edit EmailID");
+                    Console.WriteLine("\n1:Edit first name\n2:Edit last name \n3:Edit Address\n4:Edit City\n5:Edit State\n6:Edit ZipCode\n7:Edit Phone Number\n8:Edit EmailID");
                     int check = Convert.ToInt32(Console.ReadLine());
                     switch (check)
                     {
@@ -119,13 +123,13 @@ namespace AddressBookSystem
                     }
 
                 }
-              }
-               if (input == false)
-                Console.WriteLine("\n\tContact not found");
-                Toprint();
             }
-         public void DeleteContact()
-         {
+            if (input == false)
+                Console.WriteLine("\n\tContact not found");
+            Toprint();
+        }
+        public void DeleteContact()
+        {
             AddContacts();
             Console.WriteLine("Enter the Firstname of the person you would like to remove.");
             string name = Console.ReadLine();
@@ -141,7 +145,7 @@ namespace AddressBookSystem
                     Console.WriteLine("Contact is not present");
                 }
             }
-         }
+        }
 
-        }       
+    }
 }
